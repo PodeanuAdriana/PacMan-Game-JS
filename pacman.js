@@ -154,12 +154,6 @@ function  loadMap(){
 
 function update(){
     if(gameOver){
-        loadMap();
-        resetPositions();
-        lives = 3;
-        score = 0;
-        gameOver =false; 
-        update();
         return;
     }
     move();
@@ -244,9 +238,10 @@ function move(){
         score += 10;
         break;
     }
-    foods.delete(foodEaten);
+   
     
  }
+  foods.delete(foodEaten);
  // next level
 
  if(foods.size == 0)
@@ -260,6 +255,15 @@ function move(){
 }
 
 function movePacman(e){
+    if (gameOver) {
+        loadMap();
+        resetPositions();
+        lives = 3;
+        score = 0;
+        gameOver = false;
+        update(); //restart game loop
+        return;
+    }
     // console.log(e.code);
     if(e.code=="ArrowUp" || e.code=="KeyW"){  
     
